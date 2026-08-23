@@ -1,0 +1,227 @@
+/* ==========================================================================
+   countdown.css — "Save the date" and the wax-sealed envelope
+   --------------------------------------------------------------------------
+   The envelope is a stack of flat images inside one box. Clicking it adds
+   .is-open (js/envelope.js), which lifts the flap, slides the card up and out,
+   and breaks the seal.
+
+   Every size below is expressed against --env-w, the envelope's width, so the
+   whole assembly scales as one unit. The design size is 401px wide: 275px tall
+   closed, 537px tall open. Ratios come from measuring the original.
+   ========================================================================== */
+
+.countdown {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+  padding: 120px var(--page-gutter);
+  background: var(--c-bg);
+}
+
+.countdown__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 859px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Envelope
+   -------------------------------------------------------------------------- */
+.envelope {
+  --env-w: 401px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* A button, so it is reachable by keyboard and announces its state */
+.envelope__stage {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: var(--env-w);
+  height: calc(var(--env-w) * 0.6858);         /* 275 / 401 */
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: height 0.9s var(--ease-soft);
+}
+
+.envelope.is-open .envelope__stage {
+  height: calc(var(--env-w) * 1.3392);         /* 537 / 401 */
+  cursor: default;
+}
+
+.envelope__stage:focus-visible {
+  outline: 2px solid var(--c-sage);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+/* Shared behaviour for the stacked layers */
+.envelope__flap-open,
+.envelope__card,
+.envelope__body,
+.envelope__flap,
+.envelope__seal,
+.envelope__with-love {
+  position: absolute;
+  transition: top     0.9s var(--ease-soft),
+              opacity 0.6s var(--ease-soft),
+              transform 0.9s var(--ease-soft);
+  pointer-events: none;
+}
+
+/* ---- the lifted flap's linen inside (behind everything) ---- */
+.envelope__flap-open {
+  left: 0;
+  top: calc(var(--env-w) * 0.0474);            /* 19px  */
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+}
+.envelope.is-open .envelope__flap-open { opacity: 1; }
+
+/* ---- the invitation card ---- */
+.envelope__card {
+  left: 1.2%;
+  top: calc(var(--env-w) * -0.0025);           /* -1px, tucked inside */
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 98%;
+  aspect-ratio: 393 / 401;
+  padding: calc(var(--env-w) * 0.14) 6% 0;
+
+  background-image: url('../../assets/images/envelope-card-512w.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+.envelope.is-open .envelope__card {
+  top: calc(var(--env-w) * 0.1521);            /* 61px, risen out */
+}
+
+.envelope__date {
+  display: block;
+  font-family: var(--font-date);
+  font-size: calc(var(--env-w) * 0.1197);      /* 48px at 401 */
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.021em;
+  color: #000;
+}
+
+/* The countdown sits under the date. The original clips this string when it
+   reads "Countdown finished!"; wrapping and balancing keeps it on the card. */
+.envelope__timer {
+  display: block;
+  margin-top: calc(var(--env-w) * 0.06);
+  font-family: var(--font-logo);
+  font-size: calc(var(--env-w) * 0.0848);      /* 34px at 401 */
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--c-ink);
+  text-wrap: balance;
+}
+
+/* ---- envelope body: the two side flaps meeting in a V ---- */
+.envelope__body {
+  left: 0;
+  top: calc(var(--env-w) * -0.0449);           /* -18px */
+  z-index: 4;
+  width: 100%;
+  /* Stated outright rather than left to aspect-ratio: the img's width/height
+     attributes act as presentational hints, and a specified height beats
+     aspect-ratio. The original crops this to 293 of its natural 312. */
+  height: calc(var(--env-w) * 0.7307);         /* 293 / 401 */
+  object-fit: cover;
+  object-position: center top;
+}
+.envelope.is-open .envelope__body {
+  top: calc(var(--env-w) * 0.6084);            /* 244px */
+}
+
+/* ---- scalloped front flap, flipped so the arch points down ---- */
+.envelope__flap {
+  left: 0;
+  top: calc(var(--env-w) * -0.0025);           /* -1px */
+  z-index: 5;
+  width: 100%;
+  height: auto;
+  transform: scaleY(-1);
+}
+.envelope.is-open .envelope__flap {
+  opacity: 0;
+  transform: scaleY(-1) translateY(14%);
+}
+
+/* ---- wax seal, tilted 10 degrees; breaks when the envelope opens ---- */
+.envelope__seal {
+  left: 43.1%;
+  top: calc(var(--env-w) * 0.2918);            /* 117px */
+  z-index: 7;
+  width: 17.7%;
+  height: auto;
+  transform: rotate(10deg);
+  transform-origin: center;
+}
+.envelope.is-open .envelope__seal {
+  opacity: 0;
+  transform: rotate(10deg) scale(0.55);
+}
+
+/* ---- "With Love" printed on the envelope ---- */
+.envelope__with-love {
+  left: 0;
+  right: 0;
+  top: calc(var(--env-w) * 0.6134);            /* 246px */
+  z-index: 6;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.24px;
+  text-align: center;
+  color: var(--c-gold);
+}
+.envelope.is-open .envelope__with-love {
+  top: calc(var(--env-w) * 1.2668);            /* 508px */
+}
+
+/* --------------------------------------------------------------------------
+   Small screens — shrink the whole envelope by changing one number
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .countdown {
+    gap: 40px;
+    padding: 72px var(--page-gutter);
+  }
+  .countdown__intro { gap: 16px; }
+}
+
+@media (max-width: 449px) {
+  .envelope { --env-w: min(401px, calc(100vw - 56px)); }
+  .envelope__with-love { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope__flap-open,
+  .envelope__card,
+  .envelope__body,
+  .envelope__flap,
+  .envelope__seal,
+  .envelope__with-love,
+  .envelope__stage { transition: none; }
+}

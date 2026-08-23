@@ -1,0 +1,306 @@
+/* ==========================================================================
+   rsvp-page.css — the standalone RSVP form page
+   ========================================================================== */
+
+.rsvp-page {
+  min-height: 100vh;
+  background: var(--c-bg);
+}
+
+.rsvp-page__back {
+  position: fixed;
+  left: 24px;
+  top: 24px;
+  z-index: 10;
+  height: 40px;
+  padding: 0 22px;
+  font-size: var(--fs-body);
+  letter-spacing: -0.2px;
+}
+
+.rsvp-page__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 96px var(--page-gutter) 48px;
+}
+
+/* --------------------------------------------------------------------------
+   The form card
+   -------------------------------------------------------------------------- */
+.rsvp-form {
+  position: relative;
+  width: 432px;
+  max-width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.rsvp-form__step {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.rsvp-form__step[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   Fields
+   -------------------------------------------------------------------------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+/* "Will you attend?" — the question above a set of pills */
+.field__question {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.14px;
+  color: var(--c-ink);
+}
+
+/* Quiet aside after a question — used to say the events list is multi-select,
+   since pills give no clue on their own that more than one can be ticked. */
+.field__hint {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.12px;
+  color: var(--c-ink-soft);
+  opacity: 0.85;
+}
+
+/* "Full Name" — the small label above a text field */
+.field__label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--c-ink-soft);
+}
+
+.field__input,
+.field__textarea {
+  width: 100%;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid rgba(37, 37, 37, 0.18);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--c-ink);
+  transition: border-color var(--dur-fast) var(--ease-soft);
+}
+
+.field__input { height: 32px; padding: 0 2px; }
+
+.field__textarea {
+  min-height: 81px;
+  padding: 8px;
+  border: 1px solid rgba(37, 37, 37, 0.18);
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.field__input::placeholder,
+.field__textarea::placeholder { color: rgba(37, 37, 37, 0.45); }
+
+.field__input:focus,
+.field__textarea:focus {
+  outline: none;
+  border-color: var(--c-sage);
+}
+
+/* Marked by js/rsvp-form.js when a required answer is missing */
+.field.is-invalid .field__input,
+.field.is-invalid .field__textarea { border-color: #b3261e; }
+.field.is-invalid .field__question,
+.field.is-invalid .field__label { color: #b3261e; }
+
+/* --------------------------------------------------------------------------
+   Pill choices — the original renders radios as soft rounded chips
+   -------------------------------------------------------------------------- */
+.pillset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+/* A group of four reads better as a 2x2 block — which is how the original lays
+   them out — than as a row of three with the fourth stretched underneath.
+   Groups of two or three keep sharing a single row. */
+.pillset:has(> :nth-child(4)) .pill { flex-basis: calc(50% - 4px); }
+
+.pill {
+  position: relative;
+  /* Share the row evenly, the way the original sizes them (three across a
+     400px column comes out at ~125px each). */
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  height: 40px;
+  padding: 0 14px;
+  background: #e9e3df;
+  border-bottom: 0.667px solid #e4ddd8;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  text-align: center;
+  color: var(--c-ink);
+  transition: background-color var(--dur-fast) var(--ease-soft),
+              color var(--dur-fast) var(--ease-soft);
+}
+
+.pill input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pill:hover { background: #e1d9d3; }
+
+.pill:has(input:checked) {
+  background: var(--c-sage);
+  color: var(--c-white);
+}
+
+.pill:has(input:focus-visible) {
+  outline: 2px solid var(--c-sage-dark);
+  outline-offset: 2px;
+}
+
+/* Fallback for engines without :has() — JS mirrors the state onto the label. */
+.pill.is-checked {
+  background: var(--c-sage);
+  color: var(--c-white);
+}
+
+/* --------------------------------------------------------------------------
+   Step 2 closing line
+   -------------------------------------------------------------------------- */
+.rsvp-form__closer {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: var(--fs-lead);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: var(--c-ink);
+}
+
+/* --------------------------------------------------------------------------
+   Spam trap — hidden from people, reachable by bots
+   -------------------------------------------------------------------------- */
+.rsvp-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Footer: step dots and navigation
+   -------------------------------------------------------------------------- */
+.rsvp-form__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.rsvp-form__prev {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: var(--c-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rsvp-form__prev[hidden] { display: none; }
+
+.rsvp-form__dots {
+  display: flex;
+  gap: 8px;
+}
+.rsvp-form__dots li {
+  width: 8px;
+  height: 8px;
+  background: rgba(37, 37, 37, 0.22);
+  border-radius: 2px;
+}
+.rsvp-form__dots li.is-current { background: var(--c-ink); }
+
+.rsvp-form__next[hidden],
+.rsvp-form__submit[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   Status message
+   -------------------------------------------------------------------------- */
+.rsvp-form__status {
+  margin-top: 16px;
+  min-height: 1.4em;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--c-ink-soft);
+}
+.rsvp-form__status.is-error   { color: #b3261e; }
+.rsvp-form__status.is-success { color: var(--c-sage); }
+
+/* Once submitted, swap the whole form for a thank-you note */
+.rsvp-form.is-sent .rsvp-form__step,
+.rsvp-form.is-sent .rsvp-form__footer { display: none; }
+
+.rsvp-form__thanks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.rsvp-form__thanks h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-heading-sm);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: var(--c-ink);
+}
+.rsvp-form__thanks p {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--c-ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .rsvp-page__back { left: 12px; top: 12px; height: 36px; padding: 0 18px; font-size: 14px; }
+  .rsvp-page__main { padding: 76px 12px 40px; }
+  .rsvp-form { padding: 8px; }
+  .pill { min-width: 0; flex: 1 1 auto; }
+}

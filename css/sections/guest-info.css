@@ -1,0 +1,166 @@
+/* ==========================================================================
+   guest-info.css — four practical blocks, each paired with two tilted cards
+   --------------------------------------------------------------------------
+   The photo cards are polaroid-style: a warm paper frame around the image with
+   the caption printed underneath, each rotated a few degrees. Odd blocks put
+   the text on the left; even blocks (.detail--flip) mirror them.
+   ========================================================================== */
+
+.guests {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  padding: 86px var(--page-gutter);
+}
+
+.guests__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.guests__heading .section-heading { text-transform: uppercase; }
+
+.guests__list {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  width: 997px;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   One block
+   -------------------------------------------------------------------------- */
+.detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: 485px;
+}
+
+.detail--flip { flex-direction: row-reverse; }
+
+.detail__text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 400px;
+  max-width: 420px;
+}
+
+.detail__icon {
+  width: 94px;
+  height: auto;
+  margin-bottom: 4px;
+}
+
+.detail__title {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--c-ink);
+}
+
+.detail__note {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: var(--c-ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   The pair of tilted cards
+   -------------------------------------------------------------------------- */
+.detail__cards {
+  position: relative;
+  flex: 0 0 548px;
+  height: 485px;
+}
+
+/* Shared polaroid frame */
+.detail__cards .photo-card {
+  position: absolute;
+  background: var(--c-bg);
+  overflow: visible;
+}
+.detail__cards .photo-card img {
+  border-radius: var(--r-photo);
+}
+
+/* Large card, tilted clockwise */
+.detail__cards .photo-card--lg {
+  right: 32px;
+  top: 30px;
+  width: 310px;
+  height: 412px;
+  padding: 13.14px 13.14px 40px;
+  transform: rotate(13deg);
+}
+.detail__cards .photo-card--lg img { height: calc(100% - 26px); }
+
+/* Small card, tilted the other way and overlapping in front */
+.detail__cards .photo-card--sm {
+  left: 10px;
+  top: 134px;
+  width: 281px;
+  height: 231px;
+  padding: 6.57px 6.57px 30px;
+  transform: rotate(-4deg);
+  z-index: 2;
+}
+.detail__cards .photo-card--sm img { height: calc(100% - 24px); }
+
+/* Mirror the card cluster on flipped blocks */
+.detail--flip .detail__cards .photo-card--lg { right: auto; left: 32px; transform: rotate(-13deg); }
+.detail--flip .detail__cards .photo-card--sm { left: auto; right: 10px; transform: rotate(4deg); }
+
+/* --------------------------------------------------------------------------
+   Small screens — text above, cards below
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .guests { gap: 40px; padding: 56px var(--page-gutter); }
+  .guests__list { gap: 48px; }
+
+  .detail,
+  .detail--flip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: 0;
+  }
+
+  .detail__text { max-width: 100%; }
+
+  /* Keep the two cards as a tight overlapping cluster rather than a tall,
+     mostly-empty box. */
+  .detail__cards { flex: 0 0 auto; width: 100%; height: 330px; }
+
+  .detail__cards .photo-card--lg,
+  .detail--flip .detail__cards .photo-card--lg {
+    left: auto;
+    right: 2%;
+    top: 0;
+    width: 208px;
+    height: 276px;
+    transform: rotate(9deg);
+  }
+  .detail__cards .photo-card--sm,
+  .detail--flip .detail__cards .photo-card--sm {
+    left: 2%;
+    right: auto;
+    top: 128px;
+    width: 190px;
+    height: 156px;
+    transform: rotate(-4deg);
+  }
+
+  .detail__icon { width: 72px; }
+}

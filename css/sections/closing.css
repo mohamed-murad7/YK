@@ -1,0 +1,174 @@
+/* ==========================================================================
+   closing.css — the sign-off
+   --------------------------------------------------------------------------
+   Two hands reach in from the sides over a photograph of foliage and veil,
+   with the signature block beneath them. Design size 1440 x 1115; the hands
+   are big — two thirds of the width each — and deliberately crop off-canvas.
+   ========================================================================== */
+
+/* The copy begins 556px down in the original, leaving the top half to the
+   hands. Anchoring it from the top rather than the bottom keeps every line
+   where it belongs no matter how tall the block itself ends up. */
+.closing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 1115px;
+  padding: 556px 24px 0;
+
+  /* Breathing room above the section. The bride's hand reaches up into this
+     band, so it has to stay clear of the FAQ above — 190px in the original. */
+  margin-top: 190px;
+
+  /* Deliberately NOT clipped. The bride's hand reaches 209px above the section
+     and is meant to be seen against the pale band above it, exactly as in the
+     original. Sideways spill during the reach is caught at page level by
+     `html { overflow-x: clip }` in base.css. */
+  overflow: visible;
+  isolation: isolate;
+}
+
+.closing__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.closing__backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   The hands
+   --------------------------------------------------------------------------
+   They reach for each other: each starts tilted and pushed outward, then
+   rotates level and slides in as the section scrolls into view. The resting
+   pose below is the finished state, so with JavaScript off the hands simply
+   render already joined.
+
+   The offsets are percentages of each image's own width and height, so the
+   whole gesture scales with the section instead of drifting on small screens.
+   -------------------------------------------------------------------------- */
+.closing__hand {
+  position: absolute;
+  z-index: 2;
+  width: 62.04%;              /* 884 of the section's 1425 */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform var(--dur-reach) var(--ease-reach);
+}
+
+/* Each hand is pinned to the edge it bleeds off, rather than given a left
+   offset. Anchoring the bride's hand with `right: 0` keeps it flush at every
+   viewport width — offsetting it from the left leaves a sliver of background
+   showing down the right edge whenever the percentages round short. */
+.closing__hand--left  { left: 0;  top: 143px; }
+.closing__hand--right { right: 0; top: -209px; }
+
+/* Starting pose — only while JavaScript is driving the reveal (.is-ready is
+   set by the inline script in <head>, and removed again if we cannot observe
+   scrolling or the reader prefers reduced motion). */
+.is-ready .closing__hand--left  { transform: translateX(-37.4%) rotate(11deg); }
+.is-ready .closing__hand--right { transform: translate(28.2%, 21.1%) rotate(20deg); }
+
+/* js/closing.js adds .is-reaching when the section comes into view */
+.is-ready .closing.is-reaching .closing__hand { transform: none; }
+
+/* --------------------------------------------------------------------------
+   Copy — sits in the lower half, over the hands
+   -------------------------------------------------------------------------- */
+.closing__body {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 28px;
+  text-align: center;
+  color: var(--c-white);
+}
+
+.closing__eyebrow { margin-bottom: 55px; }
+
+.closing__title {
+  max-width: 460px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+/* Very large by design — it spans most of the page at full width.
+   --------------------------------------------------------------------------
+   It also writes itself on, left to right, as the section arrives. The
+   original does this with an SVG mask whose rectangle grows; a horizontal
+   clip does the same job while leaving this as real, selectable, editable
+   text rather than a picture of text.
+
+   The vertical insets are negative so the script's ascenders, descenders and
+   swashes are never clipped — only the right edge sweeps. */
+.closing__signature {
+  font-family: var(--font-script);
+  font-size: min(200px, 13.9vw);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--c-white);
+}
+
+/* The clip lives on the inner span, never on .closing__signature itself —
+   clipping an element also collapses its own IntersectionObserver ratio, so the
+   box js/closing.js watches has to stay unclipped or the wipe never starts.
+
+   The wipe also gets its own trigger rather than riding on .is-reaching: the
+   signature sits two thirds of the way down a 1115px section, so by the time
+   the section is 20% visible it would have finished writing before anyone had
+   scrolled far enough to watch. */
+.closing__signature-ink {
+  display: inline-block;
+  transition: clip-path var(--dur-write) var(--ease-write);
+}
+
+/* Hidden and ready to be written, but only while JavaScript is driving it —
+   without it the signature is simply there, whole. */
+.is-ready .closing__signature-ink { clip-path: inset(-30% 100% -30% -6%); }
+.is-ready .closing__signature.is-writing .closing__signature-ink { clip-path: inset(-30% -6% -30% -6%); }
+
+.closing__body .btn { margin-top: 26px; }
+
+.closing__credit {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--c-white);
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  /* 375 x 606 in the original, with the copy starting 201px down. */
+  .closing {
+    min-height: 606px;
+    padding: 201px 16px 24px;
+    margin-top: 90px;
+  }
+
+  /* The hands keep the same proportion of the section as on desktop — they are
+     not scaled up here — and stay pinned to the edges they bleed off. */
+  .closing__hand--left  { left: 0;    right: auto; top: 32px; }
+  .closing__hand--right { left: auto; right: 0;    top: 0; }
+
+  .closing__eyebrow { margin-bottom: 32px; }
+  .closing__title { font-size: 24px; max-width: 320px; }
+  .closing__signature { font-size: min(65px, 17.5vw); margin-top: 39px; }
+  .closing__body .btn { margin-top: 30px; }
+  .closing__credit { margin-top: 30px; }
+}

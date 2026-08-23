@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>RSVP — Yara &amp; Kareem</title>
+<meta name="description" content="Let Yara and Kareem know whether you can join them on 17 July 2027 at The Willow Estate.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="assets/icons/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/rsvp-page.css">
+</head>
+
+<body class="rsvp-page">
+
+<a class="btn btn--solid rsvp-page__back" href="index.html">
+  <span class="btn__labels"><span>Back</span><span>Back</span></span>
+</a>
+
+<main class="rsvp-page__main">
+
+  <form class="rsvp-form" id="rsvp-form" novalidate>
+
+    <!-- ================= STEP 1 ================= -->
+    <fieldset class="rsvp-form__step is-active" data-step="1">
+      <legend class="sr-only">About you</legend>
+
+      <div class="field">
+        <p class="field__question" id="q-attending">Will you attend?</p>
+        <div class="pillset" role="radiogroup" aria-labelledby="q-attending">
+          <label class="pill"><input type="radio" name="Attending" value="Yes" required><span>Yes</span></label>
+          <label class="pill"><input type="radio" name="Attending" value="No"><span>No</span></label>
+          <label class="pill"><input type="radio" name="Attending" value="Not Sure"><span>Not Sure</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <p class="field__question" id="q-side">You are From?</p>
+        <div class="pillset" role="radiogroup" aria-labelledby="q-side">
+          <label class="pill"><input type="radio" name="Which Side" value="Bride’s side" required><span>Bride’s side</span></label>
+          <label class="pill"><input type="radio" name="Which Side" value="Groom's side"><span>Groom's side</span></label>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field__label">Full Name</span>
+        <input class="field__input" type="text" name="Name" placeholder="Mohamed Murad" autocomplete="name" required>
+      </label>
+
+      <label class="field">
+        <span class="field__label">Phone / WhatsApp</span>
+        <input class="field__input" type="tel" name="Phone" placeholder="+20 1003591727" autocomplete="tel" required>
+      </label>
+    </fieldset>
+
+    <!-- ================= STEP 2 ================= -->
+    <fieldset class="rsvp-form__step" data-step="2" hidden>
+      <legend class="sr-only">Your plans</legend>
+
+      <!-- Checkboxes, not radios: a guest can be coming to more than one of
+           these. They all keep name="Event", so several answers arrive under
+           one key and js/rsvp-form.js joins them into a single cell. -->
+      <div class="field">
+        <p class="field__question" id="q-events">Which events will you attend?
+          <span class="field__hint">Pick as many as you like</span>
+        </p>
+        <div class="pillset" role="group" aria-labelledby="q-events">
+          <label class="pill"><input type="checkbox" name="Event" value="Wedding Ceremony"><span>Wedding Ceremony</span></label>
+          <label class="pill"><input type="checkbox" name="Event" value="Wedding Reception"><span>Wedding Reception</span></label>
+          <label class="pill"><input type="checkbox" name="Event" value="Rehearsal Dinner"><span>Rehearsal Dinner</span></label>
+          <label class="pill"><input type="checkbox" name="Event" value="After Party"><span>After Party</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <p class="field__question" id="q-guests">Number of guests attending:</p>
+        <div class="pillset" role="radiogroup" aria-labelledby="q-guests">
+          <label class="pill"><input type="radio" name="No. of Guests" value="1"><span>1</span></label>
+          <label class="pill"><input type="radio" name="No. of Guests" value="2"><span>2</span></label>
+          <label class="pill"><input type="radio" name="No. of Guests" value="3"><span>3</span></label>
+          <label class="pill"><input type="radio" name="No. of Guests" value="3+"><span>3+</span></label>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field__label">Message for the couple:</span>
+        <textarea class="field__textarea" name="Message for Couple" rows="3" placeholder="Write Message Here"></textarea>
+      </label>
+
+      <p class="rsvp-form__closer">All Set to Lock It In?</p>
+    </fieldset>
+
+    <!-- Spam trap. Real people never see or fill this; bots usually do.
+         Keep it — the original relied on the same technique. -->
+    <div class="rsvp-form__trap" aria-hidden="true">
+      <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="rsvp-form__footer">
+      <button class="rsvp-form__prev" type="button" hidden>Previous</button>
+
+      <ol class="rsvp-form__dots" aria-hidden="true">
+        <li class="is-current"></li>
+        <li></li>
+      </ol>
+
+      <button class="btn btn--solid rsvp-form__next" type="button">
+        <span class="btn__labels"><span>Next</span><span>Next</span></span>
+      </button>
+
+      <button class="btn btn--solid rsvp-form__submit" type="submit" hidden>
+        <span class="btn__labels"><span>Rsvp</span><span>Rsvp</span></span>
+      </button>
+    </div>
+
+    <p class="rsvp-form__status" role="status" aria-live="polite"></p>
+
+  </form>
+
+</main>
+
+<script src="js/rsvp-form.js" defer></script>
+</body>
+</html>

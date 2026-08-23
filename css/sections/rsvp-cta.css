@@ -1,0 +1,175 @@
+/* ==========================================================================
+   rsvp-cta.css — the invitation to respond, printed on a sheet of handmade
+   paper over a full-bleed photograph.
+   --------------------------------------------------------------------------
+   Design size: a 920 x 621 sheet holding a 624-wide block of copy, with the
+   wax seal straddling the sheet's top edge.
+   ========================================================================== */
+
+.rsvp-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 900px;
+  padding: var(--page-gutter);
+  overflow: hidden;
+}
+
+.rsvp-cta__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.rsvp-cta__backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Paper sheet
+   -------------------------------------------------------------------------- */
+.rsvp-cta__sheet {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 920px;
+  max-width: 100%;
+  min-height: 621px;
+}
+
+.rsvp-cta__paper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* Seal sits centred on the top edge, overlapping it by about a third.
+   The artwork is a tall image with the wax blob in the middle, so the box is
+   given both dimensions and `contain` letterboxes the blob to the right size —
+   sizing by width alone makes it far too big and swallows the label below. */
+.rsvp-cta__seal {
+  position: absolute;
+  left: 50%;
+  top: -13%;
+  z-index: 2;
+  width: 199px;
+  height: 209px;
+  object-fit: contain;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.rsvp-cta__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 624px;
+  max-width: 100%;
+  padding: 32px;
+  text-align: center;
+}
+
+.rsvp-cta__eyebrow { margin-bottom: 30px; }
+
+/* Both sentences share one style in the original: Lustria 32/38, title-cased */
+.rsvp-cta__lines { margin-bottom: 60px; }
+
+.rsvp-cta__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-heading-sm);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  text-transform: capitalize;
+  color: var(--c-ink);
+}
+
+/* --------------------------------------------------------------------------
+   The chip: date and deadline on the left, button on the right
+   -------------------------------------------------------------------------- */
+.rsvp-cta__chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 585px;
+  max-width: 100%;
+  padding: 24px;
+  background: var(--c-sage-faint);
+  border-radius: var(--r-frame);
+  isolation: isolate;
+}
+
+/* Painted flourish that fades in behind the chip on hover */
+.rsvp-cta__chip-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: 706px;
+  max-width: 130%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-soft);
+  pointer-events: none;
+}
+.rsvp-cta__chip:hover .rsvp-cta__chip-img { opacity: 1; }
+
+.rsvp-cta__chip-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+}
+
+.rsvp-cta__date {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--c-ink);
+}
+
+.rsvp-cta__deadline {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: var(--c-ink);
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .rsvp-cta { height: auto; min-height: 640px; padding: 56px var(--page-gutter); }
+
+  .rsvp-cta__sheet { min-height: 520px; }
+
+  .rsvp-cta__body { width: 100%; padding: 24px 20px; }
+  .rsvp-cta__eyebrow { margin-bottom: 16px; }
+  .rsvp-cta__lines   { margin-bottom: 32px; }
+
+  .rsvp-cta__chip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+  }
+  .rsvp-cta__chip-text { align-items: center; text-align: center; }
+
+  .rsvp-cta__seal { width: 110px; top: -7%; }
+}

@@ -1,0 +1,358 @@
+/* ==========================================================================
+   components.css — pieces reused across the page
+   Buttons, the floating navigation, photo cards, the FAQ accordion, rules.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Skip link
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--c-white);
+  border-radius: var(--r-pill);
+  font-size: 14px;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+/* --------------------------------------------------------------------------
+   Thin decorative rule — the 32x2 white dash beside the hero caption
+   -------------------------------------------------------------------------- */
+.rule {
+  display: block;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 2px;
+  background: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Label swap
+   --------------------------------------------------------------------------
+   Every button and nav link in the original carries its label twice. On hover
+   the first copy slides up out of the clipped box while the second slides in
+   from below. Both copies sit in the same grid cell so the button never
+   changes width.
+   -------------------------------------------------------------------------- */
+.btn__labels,
+.btn-text__labels {
+  display: grid;
+  grid-template-areas: 'label';
+}
+
+.btn__labels > span,
+.btn-text__labels > span {
+  grid-area: label;
+  white-space: nowrap;
+  transition: transform var(--dur-fast) var(--ease-soft),
+              opacity   var(--dur-fast) var(--ease-soft);
+}
+
+.btn__labels > span:last-child,
+.btn-text__labels > span:last-child {
+  transform: translateY(110%);
+  opacity: 0;
+}
+
+.btn:hover  .btn__labels > span:first-child,
+.btn:focus-visible .btn__labels > span:first-child,
+.btn-text:hover .btn-text__labels > span:first-child,
+.btn-text:focus-visible .btn-text__labels > span:first-child {
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+.btn:hover  .btn__labels > span:last-child,
+.btn:focus-visible .btn__labels > span:last-child,
+.btn-text:hover .btn-text__labels > span:last-child,
+.btn-text:focus-visible .btn-text__labels > span:last-child {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Text button — the three navigation links
+   -------------------------------------------------------------------------- */
+.btn-text {
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.12px;
+  color: var(--c-ink);
+  transition: background-color var(--dur-fast) var(--ease-soft);
+}
+.btn-text:hover { background: var(--c-sage-faint); }
+
+/* --------------------------------------------------------------------------
+   Filled button
+   -------------------------------------------------------------------------- */
+.btn {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  color: var(--c-white);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  transition: background-color var(--dur-fast) var(--ease-soft);
+}
+
+/* Compact button that lives in the navigation bar */
+.btn--nav {
+  height: 38px;
+  padding: 0 20px;
+  background: var(--c-sage-dark);
+  font-size: var(--fs-btn-sm);
+  letter-spacing: -0.14px;
+}
+.btn--nav:hover { background: var(--c-sage); }
+
+/* Standard in-page button, e.g. on the venue card */
+.btn--solid {
+  height: 46px;
+  padding: 0 26px;
+  background: var(--c-sage);
+  box-shadow: var(--sh-btn);
+  font-size: 19px;
+  letter-spacing: -0.19px;
+}
+.btn--solid:hover { background: var(--c-sage-dark); }
+
+/* Larger button used inside the RSVP sheet */
+.btn--lg {
+  height: 56px;
+  padding: 0 32px;
+  font-size: var(--fs-lead);
+  letter-spacing: -0.24px;
+}
+
+/* --------------------------------------------------------------------------
+   Floating navigation bar
+   -------------------------------------------------------------------------- */
+.nav {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 50px;
+  padding: 6px 6px 6px 12px;
+  background: var(--c-white);
+  border-radius: var(--r-nav);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.nav__logo {
+  font-family: var(--font-logo);
+  font-size: var(--fs-lead);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--c-ink);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Fixed track width in the original (184px) — kept as a minimum so longer
+     labels can still grow the bar instead of overflowing it. */
+  min-width: 184px;
+}
+
+/* The burger only exists on small screens */
+.nav__burger {
+  display: none;
+  width: 30px;
+  height: 30px;
+  padding: 7px 5px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav__burger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--c-ink);
+  border-radius: 2px;
+  transition: transform var(--dur-fast) var(--ease-soft),
+              opacity   var(--dur-fast) var(--ease-soft);
+}
+/* Burger morphs into a cross while the panel is open.
+   Driven by .is-open (set in js/nav.js) rather than [aria-expanded] so the
+   styling hook and the accessibility state stay independent. */
+.nav__burger.is-open .nav__burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__burger.is-open .nav__burger-line:nth-child(2) { opacity: 0; }
+.nav__burger.is-open .nav__burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Drop-down panel for small screens.
+   Positioned absolutely rather than added to the frame's flex flow — as a flex
+   item it would be pushed to the middle of the hero by space-between when it
+   opens, shoving the caption around. */
+.nav__panel {
+  position: absolute;
+  left: 50%;
+  top: 60px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  width: calc(100% - 26px);
+  padding: 10px;
+  background: var(--c-white);
+  border-radius: var(--r-nav);
+  box-shadow: var(--sh-btn);
+}
+.nav__panel[hidden] { display: none; }
+.nav__panel > a:not(.btn) {
+  padding: 10px 12px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--c-ink);
+}
+.nav__panel > a:not(.btn):hover { background: var(--c-sage-faint); }
+.nav__panel > .btn { margin-top: 4px; }
+
+@media (max-width: 809.98px) {
+  .nav {
+    /* Inset from the frame edge by 13px each side, as in the original */
+    width: calc(100% - 26px);
+    height: 40px;
+    gap: 0;
+    padding: 6px 8px 6px 12px;
+    justify-content: space-between;
+  }
+  .nav__links,
+  .nav > .btn--nav { display: none; }
+  .nav__burger { display: flex; }
+  .nav__logo { font-size: 20px; }
+}
+
+@media (min-width: 810px) {
+  /* The panel is only ever a small-screen affordance */
+  .nav__panel { display: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Photo card — the paired images beside each guest-information block
+   -------------------------------------------------------------------------- */
+.photo-card {
+  position: relative;
+  margin: 0;
+  border-radius: var(--r-photo);
+  overflow: hidden;
+}
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.photo-card figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+}
+.photo-card--lg {
+  box-shadow: var(--sh-card-lg);
+}
+.photo-card--lg figcaption {
+  font-family: var(--font-script);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.64px;
+  color: var(--c-sage);
+}
+.photo-card--sm {
+  box-shadow: var(--sh-card-sm);
+}
+.photo-card--sm figcaption {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.32px;
+  color: var(--c-sage);
+}
+
+/* --------------------------------------------------------------------------
+   Accordion (FAQ)
+   -------------------------------------------------------------------------- */
+.qa {
+  border-bottom: 1px solid rgba(37, 37, 37, 0.12);
+}
+
+.qa__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 32px 0;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: var(--fs-lead);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--c-ink);
+}
+
+.qa__icon {
+  flex: 0 0 auto;
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  transition: transform var(--dur-fast) var(--ease-soft);
+}
+.qa__trigger[aria-expanded='true'] .qa__icon { transform: rotate(45deg); }
+
+.qa__panel {
+  overflow: hidden;
+}
+.qa__panel[hidden] { display: none; }
+.qa__panel > p {
+  max-width: 68ch;
+  padding: 0 0 24px;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.2px;
+  color: var(--c-ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal — sections fade and rise the first time they appear.
+   Matches the original's 0.8s / cubic-bezier(0.44, 0, 0.56, 1) entrance.
+   The .is-ready class is added by js/reveal.js, so with JavaScript disabled
+   everything simply stays visible.
+   -------------------------------------------------------------------------- */
+.is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-soft),
+              transform var(--dur-slow) var(--ease-soft);
+}
+.is-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-ready [data-reveal] { opacity: 1; transform: none; }
+}

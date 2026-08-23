@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Yara &amp; Kareem — 17 July 2027</title>
+<meta name="description" content="Together with our families, we invite you to celebrate the beginning of our forever. Saturday 17th July 2027, The Willow Estate, Sonoma Valley, California.">
+
+<link rel="icon" href="assets/icons/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+<!-- Social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yara &amp; Kareem — 17 July 2027">
+<meta property="og:description" content="Together with our families, we invite you to celebrate the beginning of our forever.">
+<meta property="og:image" content="assets/icons/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yara &amp; Kareem — 17 July 2027">
+<meta name="twitter:description" content="Together with our families, we invite you to celebrate the beginning of our forever.">
+<meta name="twitter:image" content="assets/icons/og-image.png">
+
+<!-- Preload the two fonts used above the fold so the hero never re-flows -->
+<link rel="preload" href="assets/fonts/lustria-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections/hero.css">
+<link rel="stylesheet" href="css/sections/countdown.css">
+<link rel="stylesheet" href="css/sections/story.css">
+<link rel="stylesheet" href="css/sections/schedule.css">
+<link rel="stylesheet" href="css/sections/venue.css">
+<link rel="stylesheet" href="css/sections/guest-info.css">
+<link rel="stylesheet" href="css/sections/rsvp-cta.css">
+<link rel="stylesheet" href="css/sections/faq.css">
+<link rel="stylesheet" href="css/sections/closing.css">
+
+<!-- Set the scroll-reveal flag before first paint. If this inline script is
+     blocked or JavaScript is off, .is-ready is never added and every section
+     simply renders visible — no flash of hidden content either way. -->
+<script>document.documentElement.className += ' is-ready';</script>
+</head>
+
+<body>
+
+<a class="skip-link" href="#our-story">Skip to content</a>
+
+<!-- ======================================================================
+     HERO — full-viewport photo with the floating navigation on top
+     ====================================================================== -->
+<section class="hero" id="hero-section" aria-labelledby="couple-names">
+  <div class="hero__frame">
+
+    <picture class="hero__media">
+      <source type="image/webp"
+              srcset="assets/images/hero-couple-768w.webp   768w,
+                      assets/images/hero-couple-1440w.webp 1440w,
+                      assets/images/hero-couple-2048w.webp 2048w"
+              sizes="100vw">
+      <img src="assets/images/hero-couple-1440w.webp" alt="Yara and Kareem on a lakeside terrace" width="2048" height="1274" fetchpriority="high" decoding="async">
+    </picture>
+
+    <!-- ---------------- Navigation ---------------- -->
+    <header class="nav" id="site-nav">
+      <a class="nav__logo" href="#hero-section">Y&amp;K</a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a class="btn-text" href="#schedule"><span class="btn-text__labels"><span>Schedule</span><span>Schedule</span></span></a>
+        <a class="btn-text" href="#our-story"><span class="btn-text__labels"><span>Our Story</span><span>Our Story</span></span></a>
+        <a class="btn-text" href="#venue"><span class="btn-text__labels"><span>Venue</span><span>Venue</span></span></a>
+      </nav>
+
+      <a class="btn btn--nav" href="#rsvp-section">
+        <span class="btn__labels"><span>Submit RSVP</span><span>Submit RSVP</span></span>
+      </a>
+
+      <button class="nav__burger" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+      </button>
+    </header>
+
+    <!-- Panel that drops out of the nav bar on small screens -->
+    <div class="nav__panel" id="mobile-menu" hidden>
+      <a href="#schedule">Schedule</a>
+      <a href="#our-story">Our Story</a>
+      <a href="#venue">Venue</a>
+      <a class="btn btn--nav" href="rsvp.html"><span class="btn__labels"><span>Submit RSVP</span><span>Submit RSVP</span></span></a>
+    </div>
+
+    <!-- ---------------- Hero caption ---------------- -->
+    <div class="hero__caption">
+      <p class="hero__kicker">
+        <span>The wedding of</span>
+        <span class="rule" aria-hidden="true"></span>
+      </p>
+
+      <h1 class="hero__title" id="couple-names">Yara &amp; Kareem</h1>
+
+      <p class="hero__date">
+        <span class="rule" aria-hidden="true"></span>
+        <span>Saturday 17th Jul, 2027</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<main>
+
+<!-- ======================================================================
+     SAVE THE DATE — invitation line and the wax-sealed envelope countdown
+     ====================================================================== -->
+<section class="countdown" aria-labelledby="countdown-heading">
+  <div class="countdown__intro">
+    <p class="eyebrow--shine countdown__eyebrow">SAVE THE DATE</p>
+    <h2 class="section-heading" id="countdown-heading">Together with our families, we invite you to celebrate the beginning of our forever.</h2>
+  </div>
+
+  <!-- Click the envelope to break the seal: the flap lifts, the card rises out
+       and the date is revealed. Layers are stacked back-to-front below.
+       Positions live in css/sections/countdown.css; js/envelope.js only
+       toggles .is-open. -->
+  <div class="envelope" data-envelope>
+    <button class="envelope__stage" type="button"
+            aria-expanded="false" aria-controls="save-the-date">
+      <span class="sr-only envelope__hint">Open the envelope to see the date</span>
+
+      <!-- Inside of the lifted flap, linen-lined. Hidden while closed. -->
+      <img class="envelope__flap-open" src="assets/images/envelope-flap-open-512w.webp"
+           srcset="assets/images/envelope-flap-open-512w.webp 1x, assets/images/envelope-flap-open-1024w.webp 2x"
+           alt="" width="1024" height="605" loading="lazy" decoding="async">
+
+      <!-- The invitation card that slides up out of the envelope -->
+      <span class="envelope__card" id="save-the-date">
+        <span class="envelope__date">July 17th, 2027</span>
+        <span class="envelope__timer" data-countdown aria-live="polite">Countdown finished!</span>
+      </span>
+
+      <!-- Envelope body: the two side flaps meeting in a V -->
+      <img class="envelope__body" src="assets/images/envelope-body-512w.webp"
+           srcset="assets/images/envelope-body-512w.webp 1x, assets/images/envelope-body-1024w.webp 2x"
+           alt="A sealed envelope" width="1024" height="796" loading="lazy" decoding="async">
+
+      <!-- Scalloped front flap, gold-edged. Sits over the body while closed. -->
+      <img class="envelope__flap" src="assets/images/envelope-flap-512w.webp"
+           srcset="assets/images/envelope-flap-512w.webp 1x, assets/images/envelope-flap-1024w.webp 2x"
+           alt="" width="1024" height="498" loading="lazy" decoding="async">
+
+      <img class="envelope__seal" src="assets/images/wax-seal.webp"
+           alt="" width="336" height="504" loading="lazy" decoding="async">
+
+      <span class="envelope__with-love">With Love</span>
+    </button>
+  </div>
+</section>
+
+
+<!-- ======================================================================
+     OUR STORY — three polaroid memory cards
+     ====================================================================== -->
+<section class="story" id="our-story" aria-labelledby="story-heading">
+  <picture class="story__backdrop" aria-hidden="true">
+    <source type="image/webp" srcset="assets/images/our-story-bg-1024w.webp 1024w, assets/images/our-story-bg-2048w.webp 2048w" sizes="100vw">
+    <img src="assets/images/our-story-bg-1024w.webp" alt="" width="2048" height="2048" loading="lazy" decoding="async">
+  </picture>
+
+  <div class="story__heading">
+    <p class="eyebrow--shine story__eyebrow">OUR STORY</p>
+    <h2 class="section-heading story__title" id="story-heading">How it started</h2>
+    <img class="story__divider" src="assets/images/our-story-divider-512w.webp"
+           srcset="assets/images/our-story-divider-512w.webp 1x, assets/images/our-story-divider-1024w.webp 2x" alt="" width="1024" height="326" loading="lazy" decoding="async">
+  </div>
+
+  <ol class="story__list">
+
+    <li class="memory" data-reveal>
+      <article class="memory__photo">
+        <header class="memory__caption">
+          <h3 class="memory__title">The Day We Met</h3>
+          <span class="memory__index">1</span>
+        </header>
+        <img class="memory__image" src="assets/images/story-1-512w.webp"
+           srcset="assets/images/story-1-512w.webp 1x, assets/images/story-1-852w.webp 2x" alt="Yara and Kareem the day they met" width="852" height="1011" loading="lazy" decoding="async">
+        <p class="memory__date">March 14, 2021</p>
+      </article>
+
+      <div class="memory__note">
+        <img class="memory__paper" src="assets/images/story-paper-512w.webp"
+           srcset="assets/images/story-paper-512w.webp 1x, assets/images/story-paper-861w.webp 2x" alt="" width="861" height="1053" loading="lazy" decoding="async">
+        <div class="memory__note-body"><p class="memory__note-text">We met through mutual friends at a small Sunday gathering. What started as a quick introduction became an evening filled with stories, laughter and the feeling that we had known each other much longer than a few hours.</p>
+        </div>
+        <img class="memory__stamp" src="assets/images/wax-stamp.webp" alt="" width="376" height="392" loading="lazy" decoding="async">
+      </div>
+    </li>
+
+    <li class="memory" data-reveal>
+      <article class="memory__photo">
+        <header class="memory__caption">
+          <h3 class="memory__title">Our First Adventure</h3>
+          <span class="memory__index">2</span>
+        </header>
+        <img class="memory__image" src="assets/images/story-2-512w.webp"
+           srcset="assets/images/story-2-512w.webp 1x, assets/images/story-2-1024w.webp 2x" alt="Yara and Kareem on their first trip together" width="1024" height="1215" loading="lazy" decoding="async">
+        <p class="memory__date">June 6, 2022</p>
+      </article>
+
+      <div class="memory__note">
+        <img class="memory__paper" src="assets/images/story-paper-512w.webp"
+           srcset="assets/images/story-paper-512w.webp 1x, assets/images/story-paper-861w.webp 2x" alt="" width="861" height="1053" loading="lazy" decoding="async">
+        <div class="memory__note-body"><p class="memory__note-text">Our first trip together took us to the coast for a spontaneous weekend away. Between missed turns, late-night conversations and a beautiful sunset, we discovered how naturally we experienced life as a team.</p>
+        </div>
+        <img class="memory__stamp" src="assets/images/wax-stamp.webp" alt="" width="376" height="392" loading="lazy" decoding="async">
+      </div>
+    </li>
+
+    <li class="memory" data-reveal>
+      <article class="memory__photo">
+        <header class="memory__caption">
+          <h3 class="memory__title">The Easiest Yes</h3>
+          <span class="memory__index">3</span>
+        </header>
+        <img class="memory__image" src="assets/images/story-3-512w.webp"
+           srcset="assets/images/story-3-512w.webp 1x, assets/images/story-3-852w.webp 2x" alt="The proposal" width="852" height="1011" loading="lazy" decoding="async">
+        <p class="memory__date">November 9, 2025</p>
+      </article>
+
+      <div class="memory__note">
+        <img class="memory__paper" src="assets/images/story-paper-512w.webp"
+           srcset="assets/images/story-paper-512w.webp 1x, assets/images/story-paper-861w.webp 2x" alt="" width="861" height="1053" loading="lazy" decoding="async">
+        <div class="memory__note-body"><p class="memory__note-text">Kareem planned a quiet evening at the place where we had our first date. Surrounded by photographs and memories from our years together, he asked one very important question—and Yara said yes before he had even finished asking.</p>
+        </div>
+        <img class="memory__stamp" src="assets/images/wax-stamp.webp" alt="" width="376" height="392" loading="lazy" decoding="async">
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+
+<!-- ======================================================================
+     SCHEDULE — the running order of the day
+     ====================================================================== -->
+<section class="schedule" id="schedule" aria-labelledby="schedule-heading">
+  <div class="schedule__heading">
+    <p class="eyebrow--shine schedule__eyebrow">THE CELEBRATION</p>
+    <h2 class="section-heading" id="schedule-heading">Wedding Day Schedule</h2>
+  </div>
+
+  <ol class="schedule__list">
+
+    <li class="slot" id="timeline-1" data-reveal>
+      <div class="slot__art"><img src="assets/images/timeline-paint-1-512w.webp"
+           srcset="assets/images/timeline-paint-1-512w.webp 1x, assets/images/timeline-paint-1-1024w.webp 2x" alt="" width="1024" height="1249" loading="lazy" decoding="async"></div>
+      <div class="slot__rail" aria-hidden="true">
+        <img class="slot__star" src="assets/images/timeline-star.webp" alt="" width="232" height="276" loading="lazy" decoding="async">
+        <span class="slot__track"><span class="slot__fill"></span></span>
+      </div>
+      <div class="slot__body">
+        <img class="slot__icon" src="assets/images/timeline-icon-1.webp" alt="" width="306" height="282" loading="lazy" decoding="async">
+        <div class="slot__text">
+          <p class="slot__time">3:30 PM</p>
+          <h3 class="slot__title">Guest Arrival</h3>
+          <p class="slot__note">Welcome to The Willow Estate. Refreshments will be available as guests arrive .</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="slot" id="timeline-2" data-reveal>
+      <div class="slot__art"><img src="assets/images/timeline-paint-2-512w.webp"
+           srcset="assets/images/timeline-paint-2-512w.webp 1x, assets/images/timeline-paint-2-1024w.webp 2x" alt="" width="1024" height="1249" loading="lazy" decoding="async"></div>
+      <div class="slot__rail" aria-hidden="true">
+        <img class="slot__star" src="assets/images/timeline-star.webp" alt="" width="232" height="276" loading="lazy" decoding="async">
+        <span class="slot__track"><span class="slot__fill"></span></span>
+      </div>
+      <div class="slot__body">
+        <img class="slot__icon" src="assets/images/timeline-icon-2.webp" alt="" width="276" height="276" loading="lazy" decoding="async">
+        <div class="slot__text">
+          <p class="slot__time">4:00 PM</p>
+          <h3 class="slot__title">Wedding Ceremony</h3>
+          <p class="slot__note">Join us in the garden as we exchange our vows and officially begin our next chapter together.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="slot" id="timeline-3" data-reveal>
+      <div class="slot__art"><img src="assets/images/timeline-paint-3-512w.webp"
+           srcset="assets/images/timeline-paint-3-512w.webp 1x, assets/images/timeline-paint-3-1024w.webp 2x" alt="" width="1024" height="1249" loading="lazy" decoding="async"></div>
+      <div class="slot__rail" aria-hidden="true">
+        <img class="slot__star" src="assets/images/timeline-star.webp" alt="" width="232" height="276" loading="lazy" decoding="async">
+        <span class="slot__track"><span class="slot__fill"></span></span>
+      </div>
+      <div class="slot__body">
+        <img class="slot__icon" src="assets/images/timeline-icon-3.webp" alt="" width="306" height="282" loading="lazy" decoding="async">
+        <div class="slot__text">
+          <p class="slot__time">4:45 PM</p>
+          <h3 class="slot__title">Cocktail Hour</h3>
+          <p class="slot__note">Enjoy drinks, light bites and live music on the terrace while we take a few photographs with our families.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="slot" id="timeline-4" data-reveal>
+      <div class="slot__art"><img src="assets/images/timeline-paint-4-512w.webp"
+           srcset="assets/images/timeline-paint-4-512w.webp 1x, assets/images/timeline-paint-4-1024w.webp 2x" alt="" width="1024" height="1249" loading="lazy" decoding="async"></div>
+      <div class="slot__rail" aria-hidden="true">
+        <img class="slot__star" src="assets/images/timeline-star.webp" alt="" width="232" height="276" loading="lazy" decoding="async">
+        <span class="slot__track"><span class="slot__fill"></span></span>
+      </div>
+      <div class="slot__body">
+        <img class="slot__icon" src="assets/images/timeline-icon-4.webp" alt="" width="306" height="282" loading="lazy" decoding="async">
+        <div class="slot__text">
+          <p class="slot__time">6:00 PM</p>
+          <h3 class="slot__title">Dinner and Toasts</h3>
+          <p class="slot__note">We will gather for dinner in the glasshouse, followed by speeches and a few stories</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="slot" id="timeline-5" data-reveal>
+      <div class="slot__art"><img src="assets/images/timeline-paint-5-512w.webp"
+           srcset="assets/images/timeline-paint-5-512w.webp 1x, assets/images/timeline-paint-5-1024w.webp 2x" alt="" width="1024" height="1249" loading="lazy" decoding="async"></div>
+      <div class="slot__rail" aria-hidden="true">
+        <img class="slot__star" src="assets/images/timeline-star.webp" alt="" width="232" height="276" loading="lazy" decoding="async">
+        <span class="slot__track"><span class="slot__fill"></span></span>
+      </div>
+      <div class="slot__body">
+        <img class="slot__icon" src="assets/images/timeline-icon-5.webp" alt="" width="306" height="282" loading="lazy" decoding="async">
+        <div class="slot__text">
+          <p class="slot__time">8:00 PM</p>
+          <h3 class="slot__title">Dancing</h3>
+          <p class="slot__note">Meet us on the dance floor for music, celebration and a night we hope none of us will forget.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="slot" id="timeline-6" data-reveal>
+      <div class="slot__art"><img src="assets/images/timeline-paint-6-512w.webp"
+           srcset="assets/images/timeline-paint-6-512w.webp 1x, assets/images/timeline-paint-6-1024w.webp 2x" alt="" width="1024" height="1249" loading="lazy" decoding="async"></div>
+      <div class="slot__rail" aria-hidden="true">
+        <img class="slot__star" src="assets/images/timeline-star.webp" alt="" width="232" height="276" loading="lazy" decoding="async">
+        <span class="slot__track"><span class="slot__fill"></span></span>
+      </div>
+      <div class="slot__body">
+        <img class="slot__icon" src="assets/images/timeline-icon-6.webp" alt="" width="306" height="282" loading="lazy" decoding="async">
+        <div class="slot__text">
+          <p class="slot__time">11:00 PM</p>
+          <h3 class="slot__title">Farewell</h3>
+          <p class="slot__note">The formal celebration will come to an end, with return transportation available for guests.</p>
+        </div>
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+
+<!-- ======================================================================
+     VENUE — location card over a full-bleed photograph
+     ====================================================================== -->
+<section class="venue" id="venue" aria-labelledby="venue-heading">
+  <picture class="venue__backdrop" aria-hidden="true">
+    <source type="image/webp" srcset="assets/images/venue-bg-1024w.webp 1024w, assets/images/venue-bg-1737w.webp 1737w" sizes="100vw">
+    <img src="assets/images/venue-bg-1024w.webp" alt="" width="1737" height="2400" loading="lazy" decoding="async">
+  </picture>
+
+  <!-- Framed card floating over the photograph -->
+  <div class="venue__card">
+    <img class="venue__card-bg" src="assets/images/venue-card-768w.webp"
+           srcset="assets/images/venue-card-768w.webp 1x, assets/images/venue-card-1440w.webp 2x" alt="" width="1440" height="2399" loading="lazy" decoding="async">
+    <div class="venue__card-body">
+      <p class="eyebrow--shine venue__eyebrow" id="venue-heading">venue and Directions</p>
+      <p class="venue__label">THE LOCATION</p>
+      <h3 class="venue__name">The Willow Estate</h3>
+      <p class="venue__place">Sonoma Valley, California</p>
+      <a class="btn btn--solid" href="#rsvp-section">
+        <span class="btn__labels"><span>Submit RSVP</span><span>Submit RSVP</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================================
+     GUEST INFORMATION — four detail blocks with paired photo cards
+     ====================================================================== -->
+<section class="guests" id="guest-info" aria-labelledby="guests-heading">
+  <div class="guests__heading">
+    <p class="eyebrow--shine guests__eyebrow">GUEST INFORMATIONS</p>
+    <h2 class="section-heading" id="guests-heading">Everything you need to know</h2>
+  </div>
+
+  <ol class="guests__list">
+
+    <li class="detail" data-reveal>
+      <div class="detail__text">
+        <img class="detail__icon" src="assets/images/guest-icon.webp" alt="" width="355" height="392" loading="lazy" decoding="async">
+        <p class="eyebrow">Accommodation</p>
+        <h3 class="detail__title">Where to Stay</h3>
+        <p class="detail__note">A limited number of rooms have been reserved for our guests at The Alder Hotel, approximately fifteen minutes from the wedding venue.  Use the booking code YARA &amp; KAREEM when reserving your room to receive the preferred wedding rate. Please book by July 12, 2027, as availability cannot be guaranteed after this date.</p>
+      </div>
+      <div class="detail__cards">
+        <figure class="photo-card photo-card--lg">
+          <img src="assets/images/guest-big-1-512w.webp"
+           srcset="assets/images/guest-big-1-512w.webp 1x, assets/images/guest-big-1-736w.webp 2x" alt="The Alder Hotel" width="736" height="1041" loading="lazy" decoding="async">
+          <figcaption>Yara &amp; Kareem</figcaption>
+        </figure>
+        <figure class="photo-card photo-card--sm">
+          <img src="assets/images/guest-small-1-512w.webp"
+           srcset="assets/images/guest-small-1-512w.webp 1x, assets/images/guest-small-1-1024w.webp 2x" alt="" width="1024" height="712" loading="lazy" decoding="async">
+          <figcaption>July 17th, 2027</figcaption>
+        </figure>
+      </div>
+    </li>
+
+    <li class="detail detail--flip" data-reveal>
+      <div class="detail__text">
+        <img class="detail__icon" src="assets/images/guest-icon.webp" alt="" width="355" height="392" loading="lazy" decoding="async">
+        <p class="eyebrow">Dress Code</p>
+        <h3 class="detail__title">What to wear</h3>
+        <p class="detail__note">We invite our guests to wear formal attire with a relaxed garden feel. Suits, formal separates, midi dresses and full-length dresses are all welcome.  Part of the celebration will take place outdoors on grass, so block heels or comfortable formal footwear are recommended</p>
+      </div>
+      <div class="detail__cards">
+        <figure class="photo-card photo-card--lg">
+          <img src="assets/images/guest-big-2-512w.webp"
+           srcset="assets/images/guest-big-2-512w.webp 1x, assets/images/guest-big-2-1027w.webp 2x" alt="Garden formal attire" width="1027" height="1027" loading="lazy" decoding="async">
+          <figcaption>Yara &amp; Kareem</figcaption>
+        </figure>
+        <figure class="photo-card photo-card--sm">
+          <img src="assets/images/guest-small-2-512w.webp"
+           srcset="assets/images/guest-small-2-512w.webp 1x, assets/images/guest-small-2-805w.webp 2x" alt="" width="805" height="559" loading="lazy" decoding="async">
+          <figcaption>July 17th, 2027</figcaption>
+        </figure>
+      </div>
+    </li>
+
+    <li class="detail" data-reveal>
+      <div class="detail__text">
+        <img class="detail__icon" src="assets/images/guest-icon.webp" alt="" width="355" height="392" loading="lazy" decoding="async">
+        <p class="eyebrow">Food and Drinks</p>
+        <h3 class="detail__title">Dinner and Refreshments</h3>
+        <p class="detail__note">A seated dinner, dessert and a selection of alcoholic and non-alcoholic drinks will be served throughout the evening.  Vegetarian and allergy-friendly options will be available. Please share any dietary requirements when completing your RSVP.</p>
+      </div>
+      <div class="detail__cards">
+        <figure class="photo-card photo-card--lg">
+          <img src="assets/images/guest-big-3-512w.webp"
+           srcset="assets/images/guest-big-3-512w.webp 1x, assets/images/guest-big-3-853w.webp 2x" alt="Dinner service" width="853" height="1027" loading="lazy" decoding="async">
+          <figcaption>Yara &amp; Kareem</figcaption>
+        </figure>
+        <figure class="photo-card photo-card--sm">
+          <img src="assets/images/guest-small-3-512w.webp"
+           srcset="assets/images/guest-small-3-512w.webp 1x, assets/images/guest-small-3-805w.webp 2x" alt="" width="805" height="559" loading="lazy" decoding="async">
+          <figcaption>July 17th, 2027</figcaption>
+        </figure>
+      </div>
+    </li>
+
+    <li class="detail detail--flip" data-reveal>
+      <div class="detail__text">
+        <img class="detail__icon" src="assets/images/guest-icon.webp" alt="" width="355" height="392" loading="lazy" decoding="async">
+        <p class="eyebrow">Transportation</p>
+        <h3 class="detail__title">Getting to the Venue</h3>
+        <p class="detail__note">Complimentary shuttle transportation will be available between The Alder Hotel and The Willow Estate.  The shuttle will leave the hotel at 3:00 PM and return trips will begin at 9:30 PM. The final shuttle will leave the venue shortly after 11:00 PM.</p>
+      </div>
+      <div class="detail__cards">
+        <figure class="photo-card photo-card--lg">
+          <img src="assets/images/guest-big-4-512w.webp"
+           srcset="assets/images/guest-big-4-512w.webp 1x, assets/images/guest-big-4-853w.webp 2x" alt="Shuttle transport" width="853" height="1027" loading="lazy" decoding="async">
+          <figcaption>Yara &amp; Kareem</figcaption>
+        </figure>
+        <figure class="photo-card photo-card--sm">
+          <img src="assets/images/guest-small-4-512w.webp"
+           srcset="assets/images/guest-small-4-512w.webp 1x, assets/images/guest-small-4-805w.webp 2x" alt="" width="805" height="559" loading="lazy" decoding="async">
+          <figcaption>July 17th, 2027</figcaption>
+        </figure>
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+
+<!-- ======================================================================
+     RSVP — invitation to respond
+     ====================================================================== -->
+<section class="rsvp-cta" id="rsvp-section" aria-labelledby="rsvp-heading">
+  <picture class="rsvp-cta__backdrop" aria-hidden="true">
+    <source type="image/webp" srcset="assets/images/rsvp-bg-768w.webp 768w, assets/images/rsvp-bg-1440w.webp 1440w, assets/images/rsvp-bg-2048w.webp 2048w" sizes="100vw">
+    <img src="assets/images/rsvp-bg-1440w.webp" alt="" width="2048" height="1274" loading="lazy" decoding="async">
+  </picture>
+
+  <div class="rsvp-cta__sheet">
+    <img class="rsvp-cta__paper" src="assets/images/rsvp-paper-1024w.webp"
+           srcset="assets/images/rsvp-paper-1024w.webp 1x, assets/images/rsvp-paper-1840w.webp 2x" alt="" width="1840" height="1242" loading="lazy" decoding="async">
+
+    <!-- Wax seal stamped over the top edge of the sheet -->
+    <img class="rsvp-cta__seal" src="assets/images/wax-seal.webp" alt="" width="336" height="504" loading="lazy" decoding="async">
+
+    <div class="rsvp-cta__body">
+      <p class="eyebrow--shine rsvp-cta__eyebrow">RSVP</p>
+
+      <div class="rsvp-cta__lines">
+        <h2 class="rsvp-cta__title" id="rsvp-heading">Please confirm your attendance</h2>
+        <p class="rsvp-cta__title">We cannot wait to celebrate this special day with you.</p>
+      </div>
+
+      <div class="rsvp-cta__chip">
+        <!-- Painted flourish that fades in behind the chip on hover -->
+        <img class="rsvp-cta__chip-img" src="assets/images/rsvp-hover-768w.webp"
+           srcset="assets/images/rsvp-hover-768w.webp 1x, assets/images/rsvp-hover-1440w.webp 2x" alt="" width="1440" height="775" loading="lazy" decoding="async">
+        <div class="rsvp-cta__chip-text">
+          <p class="rsvp-cta__date">July 17th, 2027</p>
+          <p class="rsvp-cta__deadline">RSVP by Jul 1 at least</p>
+        </div>
+        <a class="btn btn--solid btn--lg" href="rsvp.html">
+          <span class="btn__labels"><span>Submit RSVP</span><span>Submit RSVP</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================================
+     FAQ — accordion
+     ====================================================================== -->
+<section class="faq" id="faq" aria-labelledby="faq-heading">
+  <div class="faq__heading">
+    <p class="eyebrow--shine faq__eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+    <h2 class="section-heading" id="faq-heading">Questions you may have</h2>
+  </div>
+
+  <div class="faq__list">
+
+    <div class="qa">
+      <h3>
+        <button class="qa__trigger" type="button" aria-expanded="false" aria-controls="qa-1">
+          <span class="qa__q">When should I RSVP?</span>
+          <img class="qa__icon" src="assets/images/faq-icon.webp" alt="" width="112" height="132" loading="lazy" decoding="async">
+        </button>
+      </h3>
+      <div class="qa__panel" id="qa-1" hidden>
+        <p>Please submit your response by July 1, 2027. This gives us enough time to confirm the final arrangements with our venue and catering team.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <h3>
+        <button class="qa__trigger" type="button" aria-expanded="false" aria-controls="qa-2">
+          <span class="qa__q">Are children invited?</span>
+          <img class="qa__icon" src="assets/images/faq-icon.webp" alt="" width="112" height="132" loading="lazy" decoding="async">
+        </button>
+      </h3>
+      <div class="qa__panel" id="qa-2" hidden>
+        <p>We love your little ones, but our wedding will be an adults-only celebration. We hope this gives parents an opportunity to relax and enjoy the evening with us.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <h3>
+        <button class="qa__trigger" type="button" aria-expanded="false" aria-controls="qa-3">
+          <span class="qa__q">What should I wear?</span>
+          <img class="qa__icon" src="assets/images/faq-icon.webp" alt="" width="112" height="132" loading="lazy" decoding="async">
+        </button>
+      </h3>
+      <div class="qa__panel" id="qa-3" hidden>
+        <p>The dress code is garden formal. Suits, formal separates, midi dresses and full-length dresses are welcome. Since part of the celebration will take place outdoors, comfortable formal footwear is recommended.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <h3>
+        <button class="qa__trigger" type="button" aria-expanded="false" aria-controls="qa-4">
+          <span class="qa__q">Will the wedding take place indoors or outdoors?</span>
+          <img class="qa__icon" src="assets/images/faq-icon.webp" alt="" width="112" height="132" loading="lazy" decoding="async">
+        </button>
+      </h3>
+      <div class="qa__panel" id="qa-4" hidden>
+        <p>The ceremony and cocktail hour are planned for the garden and terrace. Dinner and dancing will take place indoors. In case of rain, the ceremony will be moved to the estate’s covered glasshouse.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <h3>
+        <button class="qa__trigger" type="button" aria-expanded="false" aria-controls="qa-5">
+          <span class="qa__q">Is parking available?</span>
+          <img class="qa__icon" src="assets/images/faq-icon.webp" alt="" width="112" height="132" loading="lazy" decoding="async">
+        </button>
+      </h3>
+      <div class="qa__panel" id="qa-5" hidden>
+        <p>Yes. Complimentary parking will be available at The Willow Estate. Guests staying at The Alder Hotel can also use the complimentary wedding shuttle.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ======================================================================
+     CLOSING — signature and credits
+     ====================================================================== -->
+<footer class="closing" aria-labelledby="closing-heading">
+  <picture class="closing__backdrop" aria-hidden="true">
+    <source type="image/webp" srcset="assets/images/closing-bg-768w.webp 768w, assets/images/closing-bg-1440w.webp 1440w" sizes="100vw">
+    <img src="assets/images/closing-bg-1440w.webp" alt="" width="1440" height="1253" loading="lazy" decoding="async">
+  </picture>
+
+  <img class="closing__hand closing__hand--left" src="assets/images/hand-left-1024w.webp"
+           srcset="assets/images/hand-left-1024w.webp 1x, assets/images/hand-left-2048w.webp 2x" alt="" width="2048" height="1048" loading="lazy" decoding="async">
+  <img class="closing__hand closing__hand--right" src="assets/images/hand-right-1024w.webp"
+           srcset="assets/images/hand-right-1024w.webp 1x, assets/images/hand-right-2048w.webp 2x" alt="" width="2048" height="1253" loading="lazy" decoding="async">
+
+  <div class="closing__body">
+    <p class="eyebrow--shine closing__eyebrow">WITH LOVE</p>
+    <h2 class="closing__title" id="closing-heading">can’t wait to celebrate with you</h2>
+    <!-- The inner span is what gets clipped as the signature writes itself on.
+         The clip has to sit on a child: clipping an element also zeroes its own
+         IntersectionObserver ratio, so the box we watch must stay unclipped. -->
+    <p class="closing__signature"><span class="closing__signature-ink">Yara &amp; Kareem</span></p>
+
+    <a class="btn btn--solid" href="rsvp.html">
+      <span class="btn__labels"><span>Submit RSVP</span><span>Submit RSVP</span></span>
+    </a>
+
+    <p class="closing__credit">
+      Designed and Developed by Mohamed Murad<br>
+      Phone: +201003591727
+    </p>
+  </div>
+</footer>
+
+
+<script src="js/nav.js" defer></script>
+<script src="js/countdown.js" defer></script>
+<script src="js/envelope.js" defer></script>
+<script src="js/schedule.js" defer></script>
+<script src="js/accordion.js" defer></script>
+<script src="js/closing.js" defer></script>
+<script src="js/reveal.js" defer></script>
+</body>
+</html>

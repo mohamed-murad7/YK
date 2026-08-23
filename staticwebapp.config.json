@@ -1,0 +1,35 @@
+﻿{
+  "": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "never",
+  "routes": [
+    {
+      "route": "/rsvp",
+      "serve": "/rsvp.html",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/assets/*",
+      "/css/*",
+      "/js/*",
+      "/favicon.ico",
+      "/*.{png,jpg,jpeg,gif,svg,webp,woff2,ico,json}"
+    ]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 404
+    }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN"
+  },
+  "mimeTypes": {
+    ".woff2": "font/woff2",
+    ".webp": "image/webp"
+  }
+}

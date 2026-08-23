@@ -1,0 +1,114 @@
+/* ==========================================================================
+   hero.css — full-viewport opening frame
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--page-gutter);
+}
+
+/* The rounded photo frame that everything sits inside */
+.hero__frame {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 0;
+  border-radius: var(--r-frame);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Background photograph */
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* --------------------------------------------------------------------------
+   Caption block pinned to the bottom of the frame
+   -------------------------------------------------------------------------- */
+.hero__caption {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px var(--page-gutter);
+  color: var(--c-white);
+
+  /* Makes the fit-to-width title below resolve against this box */
+  container-type: inline-size;
+}
+
+.hero__kicker,
+.hero__date {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--c-white);
+}
+
+.hero__kicker { justify-content: flex-start; padding-bottom: 24px; }
+.hero__date   { justify-content: flex-end; }
+
+/* --------------------------------------------------------------------------
+   The couple's names
+   --------------------------------------------------------------------------
+   In the original this is an SVG that Framer scales so the text exactly spans
+   the caption. The same result comes from sizing the type as a fixed
+   percentage of the caption width: 208.905px measured across a 1361px caption
+   is 15.3494%. Adjust that one number if you change the names.
+   -------------------------------------------------------------------------- */
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: calc((100vw - (var(--page-gutter) * 4)) * 0.153494); /* fallback */
+  line-height: 0.9;
+  letter-spacing: -0.0249em;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--c-white);
+}
+
+@supports (container-type: inline-size) {
+  .hero__title { font-size: 15.3494cqw; }
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .hero__frame { padding: 12px 0 0; }
+
+  .hero__caption { padding: 12px; }
+
+  .hero__kicker,
+  .hero__date {
+    gap: 8px;
+    font-size: 14px;
+    letter-spacing: -0.24px;
+  }
+  .hero__kicker { padding-bottom: 12px; }
+
+  .rule { width: 20px; }
+}

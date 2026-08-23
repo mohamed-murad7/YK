@@ -1,0 +1,242 @@
+/* ==========================================================================
+   story.css — "How it started": three memories over a painted backdrop
+   --------------------------------------------------------------------------
+   Each memory is a photo card with a handwritten note laid over its lower
+   right, and a wax stamp where the two meet. The note sits ON TOP of the photo
+   card, which is what makes the pair read as a stack of keepsakes.
+
+   Layout comes straight from the original: the note is always 140px right and
+   160px below the photo card, and the stamp sits at the note's top-left corner.
+   So each memory only needs to say where its photo card goes — the rest
+   follows from that one anchor.
+   ========================================================================== */
+
+.story {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: var(--section-pad-y) var(--page-gutter);
+  overflow: hidden;
+}
+
+/* Painted paper backdrop behind the whole section */
+.story__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.story__backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Heading — a torn strip of paper with the label and title printed on it
+   -------------------------------------------------------------------------- */
+.story__heading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 463px;
+  max-width: 100%;
+  min-height: 152px;
+  /* Narrower side padding than it looks like it needs: "HOW IT STARTED" is
+     ~348px at 42px Lustria and has to stay on one line. */
+  padding: 24px 32px;
+}
+
+.story__title {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.story__divider {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Memory list
+   -------------------------------------------------------------------------- */
+.story__list {
+  position: relative;
+  z-index: 1;
+  width: 1037px;
+  max-width: 100%;
+}
+
+/* Each memory positions its three pieces from one anchor point. Heights are
+   the original's: the middle memory is shorter, so the cards interleave. */
+.memory {
+  position: relative;
+  --photo-x: 0px;
+  --photo-y: 0px;
+  height: 580px;
+}
+.memory:nth-child(2) {
+  --photo-x: 551px;
+  --photo-y: -74px;
+  height: 300px;
+}
+
+/* ---- the photo card ---- */
+.memory__photo {
+  position: absolute;
+  left: var(--photo-x);
+  top: var(--photo-y);
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 316px;
+  padding: 16px;
+  background: var(--c-bg);
+  border-radius: var(--r-frame);
+  box-shadow: var(--sh-photo);
+  overflow: hidden;
+}
+
+.memory__caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.memory__title,
+.memory__index {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--c-ink-soft);
+}
+
+.memory__date {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: var(--c-ink-soft);
+}
+
+.memory__image {
+  width: 100%;
+  height: 337px;
+  object-fit: cover;
+  border-radius: var(--r-frame);
+}
+
+/* ---- the note, laid over the photo card ---- */
+.memory__note {
+  position: absolute;
+  left: calc(var(--photo-x) + 140px);
+  top: calc(var(--photo-y) + 160px);
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 384px;
+  height: 422px;
+  padding: 56px 48px;
+}
+
+.memory__paper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.memory__note-body { text-align: center; }
+
+.memory__note-text {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: var(--c-ink);
+}
+
+/* ---- wax stamp over the join ----
+   Offsets are relative to the note, which is this element's containing block:
+   145px in from its left edge and 28px above its top, so the stamp straddles
+   the corner where the note overlaps the photo card. */
+.memory__stamp {
+  position: absolute;
+  left: 145px;
+  top: -28px;
+  z-index: 3;
+  width: 94px;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Small screens — stack the note under the photo instead of over it
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .story { gap: 40px; }
+
+  .story__heading { padding: 16px 20px; }
+  .story__title { white-space: normal; }
+
+  .story__list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    width: 100%;
+  }
+
+  .memory,
+  .memory:nth-child(2) {
+    --photo-x: 0px;
+    --photo-y: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .memory__photo,
+  .memory__note,
+  .memory__stamp {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+
+  .memory__photo { width: 100%; max-width: 340px; }
+
+  .memory__note {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    min-height: 300px;
+    margin-top: -24px;
+    padding: 48px 32px;
+  }
+
+  .memory__stamp {
+    align-self: flex-end;
+    width: 72px;
+    margin: -46px 16px -20px 0;
+    z-index: 3;
+  }
+}

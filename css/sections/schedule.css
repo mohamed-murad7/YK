@@ -1,0 +1,190 @@
+/* ==========================================================================
+   schedule.css — the running order of the day
+   --------------------------------------------------------------------------
+   Every slot is three columns: painted artwork, a thin progress rail, and the
+   text. Odd slots put the artwork on the left; even slots mirror the row so
+   the timeline zig-zags down the page. The rail fills as the slot scrolls
+   past, driven by js/schedule.js.
+   ========================================================================== */
+
+.schedule {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: var(--section-pad-y) var(--page-gutter);
+}
+
+.schedule__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.schedule__heading .section-heading { text-transform: uppercase; }
+
+.schedule__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 1026px;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   One slot
+   -------------------------------------------------------------------------- */
+.slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+/* ---- painted artwork ---- */
+.slot__art {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 449px;
+  height: 100%;
+  overflow: hidden;
+}
+.slot__art img {
+  width: 220px;
+  height: 270px;
+  object-fit: contain;
+}
+
+/* ---- progress rail: a gold star above a filling line ---- */
+.slot__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  flex: 0 0 32px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slot__star {
+  flex: 0 0 auto;
+  width: 32px;
+  height: auto;
+}
+
+.slot__track {
+  position: relative;
+  flex: 1 1 auto;
+  width: 3px;
+  background: var(--c-white);
+  border-radius: var(--r-bar);
+  overflow: hidden;
+}
+
+.slot__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* js/schedule.js sets --progress from 0 to 1 as the slot scrolls past */
+  height: calc(var(--progress, 0) * 100%);
+  background: var(--c-sage-mid);
+  border-radius: inherit;
+}
+
+/* ---- text column ---- */
+.slot__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  flex: 0 0 449px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slot__icon {
+  width: 94px;
+  height: auto;
+}
+
+.slot__text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 240px;
+  max-width: 100%;
+}
+
+.slot__time {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: var(--c-ink-soft);
+}
+
+.slot__title {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--c-ink);
+}
+
+.slot__note {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: var(--c-ink);
+}
+
+/* ---- mirrored slots ---- */
+.slot:nth-child(even) { flex-direction: row-reverse; }
+.slot:nth-child(even) .slot__art  { justify-content: flex-start; }
+.slot:nth-child(even) .slot__body { align-items: flex-end; text-align: right; }
+
+/* --------------------------------------------------------------------------
+   Small screens — a single left rail with the text beside it
+   -------------------------------------------------------------------------- */
+@media (max-width: 809.98px) {
+  .schedule { gap: 40px; }
+  .schedule__list { gap: 24px; }
+
+  .slot,
+  .slot:nth-child(even) {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 28px;
+    height: auto;
+    min-height: 300px;
+  }
+
+  /* The artwork is desktop-only in the original layout */
+  .slot__art { display: none; }
+
+  .slot__rail { flex: 0 0 32px; }
+
+  .slot__body,
+  .slot:nth-child(even) .slot__body {
+    flex: 1 1 auto;
+    align-items: flex-start;
+    text-align: left;
+    gap: 16px;
+  }
+
+  .slot__icon { width: 72px; }
+  .slot__text { width: 100%; }
+}
