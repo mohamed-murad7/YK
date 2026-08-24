@@ -1,5 +1,5 @@
-﻿{
-  "": "https://json.schemastore.org/staticwebapp.config.json",
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
   "trailingSlash": "never",
   "routes": [
     {
